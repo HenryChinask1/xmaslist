@@ -9,47 +9,53 @@ class Name:
         self.email = email
         self.conflicts = conflicts
         self.number = number
+        self.pick = ''
 
-beth = Name('Beth', 'bethbaier1007@outlook.com', 'Jeff', 0)
-jeff = Name('Jeff', 'jeffbaier72@yahoo.com', 'Beth', 1)
-jude = Name('Jude', 'judeherman1@aol.com', 'Greg', 2)
-greg = Name('Greg', 'undecidedgd@yahoo.com', 'Jude', 3)
-joel = Name('Joel', 'jbaier@ewmi.com', 'Chelsea', 4)
-chelsea = Name('Chelsea', 'ex@ex.com','Joel', 5)
-jerry = Name('Jerry', 'ex@ex.com', 'Cindy', 6)
-cindy = Name('Cindy', 'ex@ex.com', 'Jerry', 7)
+beth = Name('Beth', 'bethbaier1007@outlook.com', ['Jeff', 'Beth'], 0)
+jeff = Name('Jeff', 'jeffbaier72@yahoo.com', ['Beth', 'Jeff'], 1)
+jude = Name('Jude', 'judeherman1@aol.com', ['Greg', 'Jude'], 2)
+greg = Name('Greg', 'undecidedgd@yahoo.com', ['Jude', 'Greg'], 3)
+joel = Name('Joel', 'jbaier@ewmi.com', ['Chelsea', 'Joel'], 4)
+chelsea = Name('Chelsea', 'ex@ex.com',['Joel', 'Chelsea'], 5)
+jerry = Name('Jerry', 'ex@ex.com', ['Cindy', 'Jerry'], 6)
+cindy = Name('Cindy', 'ex@ex.com', ['Jerry', 'Cindy'], 7)
 
-# The gang and thier conflicts.
-names = {'Beth': ['bethbaier1007@outlook.com', 'Jeff'], 
-         'Jeff': ['jeffbaier72@yahoo.com', 'Beth'], 
-         'Jude': ['judeherman1@aol.com', 'Greg'], 
-         'Greg': ['undecidedgd@yahoo.com', 'Jude'], 
-         'Joel': ['jbaier@ewmi.com', 'Chelsea'], 
-         'Chelsea': ['ex@ex.com','Joel'], 
-         'Jerry': ['ex@ex.com', 'Cindy'], 
-         'Cindy': ['ex@ex.com', 'Jerry']}
-
-print(names)
+names = [beth, jeff, jude, greg, joel, chelsea, jerry, cindy]
 random.shuffle(names)
-print(names)
-numbers = [str(i) for i in range(8)]
-random.shuffle(numbers)
-print(numbers)
+picks = [beth, jeff, jude, greg, joel, chelsea, jerry, cindy]
+random.shuffle(picks)
 
-# subject = 'Your Secret Santa'
-# body = f'Your secret santa is {name}!'
-# sender = config.EMAILUSER
-# recipients = name.email
-# password = config.PASSWORD
+i = 0
+while picks and i < 8:
+    if picks[-1].name not in names[i].conflicts:
+        names[i].pick = picks[-1].name
+        picks.pop()
+        i += 1
+    else:
+        picks = [beth, jeff, jude, greg, joel, chelsea, jerry, cindy]
+        for i in names:
+            i.pick = ''
+        random.shuffle(picks)
+        i = 0
 
-# def send_email(subject, body, sender, recipients, password):
-#     msg = MIMEText(body)
-#     msg['Subject'] = subject
-#     msg['From'] = sender
-#     msg['To'] = recipients
-#     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
-#         smtp_server.login(sender, password)
-#         smtp_server.sendmail(sender, recipients, msg.as_string())
-#     print('Message Sent')
+for i in names:
+    print(i.name, i.pick)
 
-# send_email()
+
+subject = 'Your Secret Santa'
+body = f'Your secret santa is {jeff.pick}!'
+sender = config.EMAILUSER
+recipients = jeff.email
+password = config.EMAILPASSWORD
+
+def send_email(subject, body, sender, recipients, password):
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = recipients
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+        smtp_server.login(sender, password)
+        smtp_server.sendmail(sender, recipients, msg.as_string())
+    print('Message Sent')
+
+send_email(subject, body, sender, recipients, password)
