@@ -49,5 +49,5 @@ for i in names:
     #     send_email(subject, body, sender, recipients, password)
 
 # Send the all picks list to Abbey to check.
-allBody = f'The secret santa picks are {allPicks}. It took {trys} picks to get it right.'
-send_email("All secret santa", allBody, config.EMAILUSER, jeff.email, config.EMAILPASSWORD) 
+allBody = f'The secret santa picks are {allPicks}.\nIt took {trys} repicks to get it right.'
+send_email("All secret santa", allBody, config.EMAILUSER, jude.email, config.EMAILPASSWORD)
