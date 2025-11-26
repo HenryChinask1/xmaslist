@@ -16,7 +16,7 @@ jerryEmail = f[9]
 cindyEmail = f[10]
 nateEmail = f[11]
 
-# The people.
+# The people as objects.
 class Name:
     def __init__(self, name, email, conflicts):
         self.name = name
