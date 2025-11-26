@@ -47,12 +47,12 @@ def main():
         sender = config.EMAILUSER
         password = config.EMAILPASSWORD
         recipients = i.email
-        # if i.email:
-        #     send_email(subject, body, sender, recipients, password)
+        if i.email:
+            send_email(subject, body, sender, recipients, password)
 
     # Send the all picks list to Abbey to check.
     allBody = f'The secret santa picks are {allPicks}.\n\nIt took {trys} repicks to get it right.'
-    send_email("All secret santa", allBody, config.EMAILUSER, jeff.email, config.EMAILPASSWORD)
+    send_email("All secret santa", allBody, config.EMAILUSER, abbey.email, config.EMAILPASSWORD)
 
 if __name__ == '__main__':
     main()
