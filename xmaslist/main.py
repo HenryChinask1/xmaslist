@@ -65,7 +65,7 @@ def main():
     # Send the all picks list to the secret_keeper to check.
     allBody: str = f'The secret santa picks are {allPicks}.\n\nIt took {trys} repicks to get it right.'
     knows_all: Name = Name(secret_keeper[0], secret_keeper[1], [secret_keeper[0]])
-    send_email("All secret santa picks", allBody, sender_email['email'], knows_all.email, sender_email['password'])
+    send_email("All secret santa picks", allBody, sender_email['email'], knows_all.email, sender_email['key'])
 
 if __name__ == '__main__':
     main()
