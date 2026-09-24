@@ -3,30 +3,30 @@ from email.mime.text import MIMEText
 
 # Email info.
 with open('secrets.txt') as f:
-    email_info = f.read().splitlines()
-    EMAILUSER = email_info[0]
-    EMAILPASSWORD = email_info[1]
-    abbeyEmail = email_info[2]
-    bethEmail = email_info[3] 
-    jeffEmail = email_info[4]
-    judeEmail = email_info[5]
-    gregEmail = email_info[6]
-    joelEmail = email_info[7]
-    chelseaEmail = email_info[8]
-    jerryEmail = email_info[9]
-    cindyEmail = email_info[10]
-    nateEmail = email_info[11]
+    email_info: list[str] = f.read().splitlines()
+    EMAILUSER: str = email_info[0]
+    EMAILPASSWORD: str = email_info[1]
+    abbeyEmail: str = email_info[2]
+    bethEmail: str = email_info[3] 
+    jeffEmail: str = email_info[4]
+    judeEmail: str = email_info[5]
+    gregEmail: str = email_info[6]
+    joelEmail: str = email_info[7]
+    chelseaEmail: str = email_info[8]
+    jerryEmail: str = email_info[9]
+    cindyEmail: str = email_info[10]
+    nateEmail: str = email_info[11]
 
 # The people as objects.
 class Name:
-    def __init__(self, name, email, conflicts):
-        self.name = name
-        self.email = email
-        self.conflicts = conflicts
-        self.pick = ''
+    def __init__(self, name: str, email: str, conflicts: list[str]):
+        self.name: str = name
+        self.email: str = email
+        self.conflicts: list[str] = conflicts
+        self.pick: str = ''
 
 # The email sender.
-def send_email(subject, body, sender, recipients, password):
+def send_email(subject: str, body: str, sender: str, recipients: str, password: str):
     msg = MIMEText(body)
     msg['Subject'] = subject
     msg['From'] = sender
