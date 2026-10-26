@@ -14,9 +14,8 @@ def create_names() -> tuple[list[Name], list[Name]]:
     picks: list[Name] = []
 
     # Load in your gang from emails.py
-    # emails should be in the form {name: (email, [exclusions])}
-    for name, email in santas.items():
-        name = Name(name, email[0], email[1])
+    for name, (email, exclusions) in santas.items():
+        name = Name(name, email, exclusions)
         names.append(name)
         picks.append(name)
 
@@ -36,7 +35,7 @@ def send_email(subject: str, body: str, sender: str, recipients: str, password: 
 
 def main():
 
-    (names, picks) = create_names()
+    names, picks = create_names()
     # Choose names until there is a conflict, then keep starting over.
     picked: int = 0
     trys: int = 0
